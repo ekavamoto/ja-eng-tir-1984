@@ -91,7 +91,10 @@ with col_display:
                     log_auditoria.append(f"CONVERGÊNCIA: Erro final {t_err:.8f}")
                     break
             
-            tir_final = int(i1 * 10000 + 0.5) / 100
+            # Tradução exata da Linha 290 do BASIC: INT(I1 * 10000 + .5) / 100
+            # Usamos abs() no ajuste para garantir que o arredondamento funcione bem com negativos
+            ajuste = 0.5 if i1 >= 0 else -0.5
+            tir_final = int(i1 * 10000 + ajuste) / 100
         except:
             tir_final = 0
 
